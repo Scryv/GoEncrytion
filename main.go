@@ -10,11 +10,11 @@ import (
 
 const saltLength = 14 //length salt Const cause needs to be a fixed length
 
-func genRandoSalt(saltLength int) []byte {
-	var salt = make([]byte, saltLength)
-	rand.Read(salt)
+func genRandoSalt(saltLength int) []byte {  //func for creating random salt
+	var salt = make([]byte, saltLength) // makes a byte slice variable called salt
+	rand.Read(salt) //reads the slice and fully changes it and ads its own rando value
 
-	return salt
+	return salt //returns salts
 }
 
 

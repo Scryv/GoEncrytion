@@ -2,8 +2,8 @@ package main
 
 import (
 	"crypto/rand"
-	_"crypto/sha512"
-	_"encoding/hex"
+	"crypto/sha512"
+	"encoding/hex"
 	"fmt"
 )
 
@@ -20,10 +20,16 @@ func genRandoSalt(saltLength int) []byte {  //func for creating random salt
 func hashPasswd(passwd string, salt []byte) string{
 	var passwdBytes = []byte(passwd) //creates byte slice of the passwd str
 	passwdBytes = append(passwdBytes, salt...) //appends and the ... is for since salt is a slice
-	
+	hash := sha512.Sum512(passwdBytes) //hashes the slice using sha512
+	return hex.EncodeToString(hash[:]) //encodes to readable and [:] to change [64]byte to []byte
 }
 
 func main(){
-salt := genRandoSalt(saltLength)
-fmt.Println(salt)
+var passwd string //just var for passwd
+fmt.Println("What password do you want to hash: ") //prompt
+fmt.Scanln(&passwd) //scans answer does stop by space tho also & so it can overwrite var
+salt := genRandoSalt(saltLength) //call and assign genSalt
+hashedpasswd := hashPasswd(passwd, salt) //call and asign hashPasswd
+fmt.Println("Salt used", hex.EncodeToString(salt)) //Prints salt used
+fmt.Printf("Your hashed passwd: %v\n", hashedpasswd) //prints the hashed salt+passwd
 }

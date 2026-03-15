@@ -17,6 +17,11 @@ func genRandoSalt(saltLength int) []byte {  //func for creating random salt
 	return salt //returns salts
 }
 
+func hashPasswd(passwd string, salt []byte) string{
+	var passwdBytes = []byte(passwd) //creates byte slice of the passwd str
+	passwdBytes = append(passwdBytes, salt...) //appends and the ... is for since salt is a slice
+	
+}
 
 func main(){
 salt := genRandoSalt(saltLength)

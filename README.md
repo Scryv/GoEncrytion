@@ -1,3 +1,3 @@
-#Passwd + salt hashing program
+# Passwd + salt hashing program
 
 made with golang

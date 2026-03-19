@@ -6,21 +6,21 @@ import (
 	"fmt"
 )
 
-type Post struct {
+type Data struct {
 	gorm.Model //auto adds fields like id created/updated/deleted at
-	Title string
-	Slug string `gorm:"uniqueIndex:idx_slug"` //slug needs to be unique or wont work
-	Likes uint
+	Username string
+	Password string
+	Salt string `gorm:"uniqueIndex:idx_salt"` //slug needs to be unique or wont work
 }
 
 var db, err = gorm.Open(sqlite.Open("test.db"), &gorm.Config{}) //opens db and connects grom
 
-func (p Post) String() string { //prints post in 1 line not sm rando bs
-	return fmt.Sprintf("Post Title: %s, Slug: %s", p.Title, p.Slug)
+func (d Data) String() string { //prints post in 1 line not sm rando bs
+	return fmt.Sprintf("Username: %s, Password: %s, Salt: %s", d.Username, d.Password, d.Salt)
 }
 
-func createPost(title string, slug string) Post { //func for creating post and also returns it
-	newPost := Post{Title: title, Slug: slug} //new post with TitleandSlug your input 
+func createPost(username string, passwd string, salt string) Data { //func for creating post and also returns it
+	newPost := Data{Username: username, Password: passwd, Salt: salt} //new post with TitleandSlug your input 
 	if res := db.Create(&newPost); res.Error != nil { //var of the create func res if res error
 	panic(res.Error) //not nil or duplicate it wil give error
 }
@@ -28,7 +28,7 @@ return newPost
 }
 
 func main(){
-	db.AutoMigrate(&Post{}) //autocreates tables and updates schema
-	freshPost := createPost("New Post Title", "new-slug") //calls func and saves row in db
+	db.AutoMigrate(&Data{}) //autocreates tables and updates schema
+	freshPost := createPost("svarta", "password1234", "qQHEWOFH99efw0we0fwenoe9efdqd") //calls func and saves row in db
 	fmt.Println(freshPost) //normally gives the struct u appended but cause of string Post func it returns clean
 }

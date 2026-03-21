@@ -1,6 +1,6 @@
 # Passwd + salt hashing program
 
-made with golang
+made with golang Building block to <a href="https://github.com/Scryv/GoVault">GoVault</a>
 
 
 <img src="https://github.com/Scryv/sm-adobe-graphic-stuff/blob/main/pictureOfTools/pshp.png?raw=true">

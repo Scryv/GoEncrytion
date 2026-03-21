@@ -7,8 +7,8 @@ import (
 )
 
 type Data struct {
-	gorm.Model //auto adds fields like id created/updated/deleted at
-	Username string
+	//gorm.Model auto adds fields like id created/updated/deleted 
+	Username string //be sure to if scan dont forget id
 	Password string
 	Salt string `gorm:"uniqueIndex:idx_salt"` //slug needs to be unique or wont work
 }
@@ -29,6 +29,6 @@ return newPost
 
 func main(){
 	db.AutoMigrate(&Data{}) //autocreates tables and updates schema
-	freshPost := createPost("svarta", "password1234", "qQHEWOFH99efw0we0fwenoe9efdqd") //calls func and saves row in db
+	freshPost := createPost("esrr", "5b0a277cc82b772e88eee648a8d9f69be687646426b7b9b1b5f8fbca4243025d8bea619b30a1457d5e26881dd9a70caeea7dd858a8690aaeadb9f257", "3c68fad118676accaddb3") //calls func and saves row in db
 	fmt.Println(freshPost) //normally gives the struct u appended but cause of string Post func it returns clean
 }
